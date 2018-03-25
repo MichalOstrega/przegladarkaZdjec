@@ -10,6 +10,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        System.out.println(getClass().getResource("sample.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Przeglądarka zdjęć");
         primaryStage.setScene(new Scene(root, 640, 500));
@@ -17,7 +18,6 @@ public class Main extends Application{
     }
 
     public static void main(String[] args) {
-        System.out.println("Dawid do zwolnienia!");
         launch(args);
 
 

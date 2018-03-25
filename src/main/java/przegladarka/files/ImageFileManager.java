@@ -6,10 +6,15 @@ import java.util.List;
 public class ImageFileManager {
     private List<ImageFile> imageFiles;
     private int currentFileIndex;
+
+    public void setOpenFile(OpenFile openFile) {
+        this.openFile = openFile;
+    }
+
     private OpenFile openFile;
 
-    public ImageFileManager(List<ImageFile> imageFiles) {
-        this.imageFiles = imageFiles;
+    public ImageFileManager() {
+
 
     }
 
