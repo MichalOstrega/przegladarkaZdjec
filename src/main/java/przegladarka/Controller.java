@@ -1,3 +1,5 @@
+package przegladarka;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -13,6 +15,8 @@ public class Controller {
     private ImageView image;
     @FXML
     private MenuItem openItem;
+    @FXML
+    private MenuItem openFolder;
     @FXML
     private MenuItem saveItem;
     @FXML
