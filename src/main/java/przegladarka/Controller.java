@@ -151,7 +151,7 @@ public class Controller {
 
     private void quitItem() {
         quitItem.setOnAction(event -> {
-            AlertBox.display("Are you sure?", "Czy aby na pewno chcesz opuścić nasz zajebisty program?");
+            AlertBox.display("Are you sure?","Czy aby na pewno chcesz opuścić nasz zajebisty program?");
         });
     }
 
