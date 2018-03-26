@@ -1,5 +1,6 @@
 package przegladarka;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -9,9 +10,12 @@ import javafx.stage.FileChooser;
 import przegladarka.files.ImageFile;
 import przegladarka.files.ImageFileManager;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 
@@ -35,25 +39,46 @@ public class Controller {
 
     private ImageFileManager imageFileManager;
 
-    public void initialize() {
+    FileChooser fileChooser;
+
+    public void initialize() throws InterruptedException {
+        imageView();
         imageFileManager = new ImageFileManager();
         openFileMenuItem();
+        saveItem.setOnAction(event -> {
+            File saveFile = fileChooser.showSaveDialog(null);
+            if (saveFile != null) {
+                save(saveFile);
+            }
 
 
+        });
+
+
+    }
+
+    private void save(File saveFile) {
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image.getImage(), null),"jpg",saveFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void openFileMenuItem() {
         openItem.setOnAction(event -> {
             //tworzę obiekt klasy FileChooser
-            FileChooser fileChooser = new FileChooser();
+            fileChooser = new FileChooser();
             //Filtry do ładowania obrazków
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg","*.bmp","*.jpeg"));
             //Pobieram wybrany przez użytkownika plik
             File imageFile = fileChooser.showOpenDialog(null);
             //Uruchamiam metodę openFile i przekazuje sciezke do pliku
-            imageFileManager.openFile(imageFile.toPath());
+            if (imageFile != null) {
+                imageFileManager.openFile(imageFile.toPath());
+                setImage(imageFileManager.getCurrentFileIndex());
+            }
 
-            setImage(imageFileManager.getCurrentFileIndex());
         });
     }
 
@@ -69,4 +94,8 @@ public class Controller {
     }
 
 
+
+    private void imageView() {
+        image.setImage(new Image("http://woleto.pl/demoty_copy/4181152.jpg"));
+    }
 }
