@@ -49,11 +49,10 @@ public class Controller {
             //Filtry do ładowania obrazków
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg"));
             //Pobieram wybrany przez użytkownika plik
-            File file = fileChooser.showOpenDialog(null);
-            //ustawiam w obiekcie imageFileManager obiekt typu OpenFile deklarując mu sposób działania metody open() w interfejsie OpenFile
-            imageFileManager.setOpenFile(() -> file.toPath());
-            //Uruchamiam metodę openFile celem przekazania do obiektu ścieżki do pliku
-            imageFileManager.openFile();
+            File imageFile = fileChooser.showOpenDialog(null);
+            //Uruchamiam metodę openFile i przekazuje sciezke do pliku
+            imageFileManager.openFile(imageFile.toPath());
+
             setImage(imageFileManager.getCurrentFileIndex());
         });
     }

@@ -7,21 +7,13 @@ import java.util.List;
 public class ImageFileManager {
     private List<ImageFile> imageFiles;
     private int currentFileIndex;
-
-    public void setOpenFile(OpenFile openFile) {
-        this.openFile = openFile;
-    }
-
-    private OpenFile openFile;
-
     public ImageFileManager() {
         imageFiles = new ArrayList<>();
         currentFileIndex=-1;
 
     }
 
-    public void openFile(){
-        Path image = openFile.open();
+    public void openFile(Path image){
         imageFiles.clear();
         imageFiles.add(new ImageFile(image));
         currentFileIndex = 0;
