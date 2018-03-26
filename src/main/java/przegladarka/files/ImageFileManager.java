@@ -20,6 +20,7 @@ public class ImageFileManager {
 
     public void openFile(){
         Path open = openFile.open();
+        imageFiles.clear();
         imageFiles.add(new ImageFile(open.getFileName().toString(), open));
         currentFileIndex = 0;
 

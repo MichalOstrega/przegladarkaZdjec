@@ -33,12 +33,12 @@ public class Controller {
 
     public void initialize() {
         imageFileManager = new ImageFileManager();
-        openFolder.setOnAction(event -> {
+        openItem.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg"));
             File file = fileChooser.showOpenDialog(null);
-            imagePath = file.toPath();
-            imageFileManager.setOpenFile(() -> imagePath);
+            imageFileManager.setOpenFile(() -> file.toPath());
+            imageFileManager.openFile();
         });
     }
 
