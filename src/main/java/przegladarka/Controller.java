@@ -81,7 +81,6 @@ public class Controller {
                 imageFiles.forEach(imageFile -> imageFileManager.openFile(imageFile.toPath()));
                 setImage(0);
             }
-
         });
     }
 
