@@ -1,6 +1,7 @@
 package przegladarka.files;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImageFileManager {
@@ -14,14 +15,15 @@ public class ImageFileManager {
     private OpenFile openFile;
 
     public ImageFileManager() {
-
+        imageFiles = new ArrayList<>();
+        currentFileIndex=-1;
 
     }
 
     public void openFile(){
-        Path open = openFile.open();
+        Path image = openFile.open();
         imageFiles.clear();
-        imageFiles.add(new ImageFile(open.getFileName().toString(), open));
+        imageFiles.add(new ImageFile(image));
         currentFileIndex = 0;
 
     }

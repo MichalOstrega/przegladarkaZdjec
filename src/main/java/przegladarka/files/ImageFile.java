@@ -11,6 +11,10 @@ public class ImageFile {
         this.path = path;
     }
 
+    public ImageFile(Path path) {
+        this(path.getFileName().toString(),path);
+    }
+
     public String getFileName() {
         return fileName;
     }
