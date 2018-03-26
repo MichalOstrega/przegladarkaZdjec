@@ -13,7 +13,7 @@ public class Main extends Application{
         System.out.println(getClass().getResource("sample.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Przeglądarka zdjęć");
-        primaryStage.setScene(new Scene(root, 640, 500));
+        primaryStage.setScene(new Scene(root, 640, 550));
         primaryStage.show();
     }
 
