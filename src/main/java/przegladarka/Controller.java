@@ -50,8 +50,6 @@ public class Controller {
         openFileMenuItem();
         saveFile();
         quitItem();
-
-
     }
 
     private void imageView() {
@@ -71,6 +69,8 @@ public class Controller {
             }
         });
     }
+
+
 
     private void setImage(int currentIndex) {
         //pobieram imageFile na podstawie przekazanego indexu
@@ -103,7 +103,7 @@ public class Controller {
 
     private void quitItem() {
         quitItem.setOnAction(event -> {
-            System.exit(0);
+            AlertBox.display("Are you sure?","Czy aby na pewno chcesz opuścić nasz zajebisty program?");
         });
     }
 

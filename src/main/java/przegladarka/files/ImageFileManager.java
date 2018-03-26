@@ -7,17 +7,19 @@ import java.util.List;
 public class ImageFileManager {
     private List<ImageFile> imageFiles;
     private int currentFileIndex;
+
     public ImageFileManager() {
         imageFiles = new ArrayList<>();
-        currentFileIndex=-1;
-
+        currentFileIndex = -1;
     }
 
-    public void openFile(Path image){
+    public void openFile(Path image) {
         imageFiles.clear();
         imageFiles.add(new ImageFile(image));
-        currentFileIndex = imageFiles.size()-1;
+        currentFileIndex = imageFiles.size() - 1;
+    }
 
+    public void openDirectory() {
     }
 
     public List<ImageFile> getImageFiles() {
