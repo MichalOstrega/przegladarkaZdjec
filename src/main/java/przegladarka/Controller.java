@@ -40,7 +40,7 @@ public class Controller {
 
     private ImageFileManager imageFileManager;
 
-    FileChooser fileChooser;
+    private FileChooser fileChooser;
 
     public void initialize() throws InterruptedException {
         //tworzę obiekt klasy FileChooser
@@ -49,7 +49,7 @@ public class Controller {
         imageFileManager = new ImageFileManager();
         openFileMenuItem();
         saveFile();
-
+        quitItem();
 
     }
 
@@ -73,7 +73,7 @@ public class Controller {
     private void openFileMenuItem() {
         openItem.setOnAction(event -> {
             //Filtry do ładowania obrazków
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg","*.bmp","*.jpeg"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.bmp", "*.jpeg"));
             //Pobieram wybrany przez użytkownika plik
             List<File> imageFiles = fileChooser.showOpenMultipleDialog(null);
             //Uruchamiam metodę openFile i przekazuje sciezke do pliku
@@ -96,8 +96,29 @@ public class Controller {
     }
 
 
+    private void saveFile() {
+        saveItem.setOnAction(event -> {
+            File saveFile = fileChooser.showSaveDialog(null);
+            if (saveFile != null) {
+                save(saveFile);
+            }
+        });
+    }
+
+    private void save(File saveFile) {
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image.getImage(), null), "jpg", saveFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void imageView() {
         image.setImage(new Image("http://www.focus.pl/media/cache/default_view/uploads/media/default/0001/13/01c9cda76044ba3835d4564589c6a3d6ecaf91c3.jpeg"));
+    private void quitItem() {
+        quitItem.setOnAction(event -> {
+            System.exit(0);
+        });
     }
+
 }
