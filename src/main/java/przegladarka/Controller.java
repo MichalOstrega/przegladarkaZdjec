@@ -48,27 +48,33 @@ public class Controller {
         imageView();
         imageFileManager = new ImageFileManager();
         openFileMenuItem();
+
         saveFile();
         quitItem();
+        buttonsPrevNext();
 
     }
 
-    private void saveFile() {
-        saveItem.setOnAction(event -> {
-            File saveFile = fileChooser.showSaveDialog(null);
-            if (saveFile != null) {
-                save(saveFile);
+    private void buttonsPrevNext() {
+        prevButton.setOnAction(event -> {
+            int currentFileIndex = imageFileManager.getCurrentFileIndex();
+            if (currentFileIndex!=-1) {
+                int changedFileIndex = currentFileIndex==0 ? imageFileManager.getImageFiles().size()-1 : currentFileIndex-1;
+                imageFileManager.setCurrentFileIndex(changedFileIndex);
+                setImage(imageFileManager.getCurrentFileIndex());
+            }
+
+        });
+        nextButton.setOnAction(event -> {
+            int currentFileIndex = imageFileManager.getCurrentFileIndex();
+            if (currentFileIndex!=-1) {
+                int changedFileIndex = currentFileIndex==imageFileManager.getImageFiles().size()-1 ? 0 : currentFileIndex+1;
+                imageFileManager.setCurrentFileIndex(changedFileIndex);
+                setImage(imageFileManager.getCurrentFileIndex());
             }
         });
     }
 
-    private void save(File saveFile) {
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image.getImage(), null),"jpg",saveFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void openFileMenuItem() {
         openItem.setOnAction(event -> {
@@ -78,6 +84,7 @@ public class Controller {
             List<File> imageFiles = fileChooser.showOpenMultipleDialog(null);
             //Uruchamiam metodę openFile i przekazuje sciezke do pliku
             if (imageFiles != null) {
+                imageFileManager.getImageFiles().clear();
                 imageFiles.forEach(imageFile -> imageFileManager.openFile(imageFile.toPath()));
                 setImage(0);
             }
@@ -115,10 +122,12 @@ public class Controller {
 
     private void imageView() {
         image.setImage(new Image("http://www.focus.pl/media/cache/default_view/uploads/media/default/0001/13/01c9cda76044ba3835d4564589c6a3d6ecaf91c3.jpeg"));
-    private void quitItem() {
-        quitItem.setOnAction(event -> {
-            System.exit(0);
-        });
     }
+        private void quitItem () {
+            quitItem.setOnAction(event -> {
+                System.exit(0);
+            });
+        }
+
 
 }

@@ -14,9 +14,8 @@ public class ImageFileManager {
     }
 
     public void openFile(Path image){
-        imageFiles.clear();
         imageFiles.add(new ImageFile(image));
-        currentFileIndex = imageFiles.size()-1;
+        currentFileIndex = 0;
 
     }
 
