@@ -57,21 +57,12 @@ public class Controller {
 
     private void buttonsPrevNext() {
         prevButton.setOnAction(event -> {
-            int currentFileIndex = imageFileManager.getCurrentFileIndex();
-            if (currentFileIndex!=-1) {
-                int changedFileIndex = currentFileIndex==0 ? imageFileManager.getImageFiles().size()-1 : currentFileIndex-1;
-                imageFileManager.setCurrentFileIndex(changedFileIndex);
-                setImage(imageFileManager.getCurrentFileIndex());
-            }
+
+
 
         });
         nextButton.setOnAction(event -> {
-            int currentFileIndex = imageFileManager.getCurrentFileIndex();
-            if (currentFileIndex!=-1) {
-                int changedFileIndex = currentFileIndex==imageFileManager.getImageFiles().size()-1 ? 0 : currentFileIndex+1;
-                imageFileManager.setCurrentFileIndex(changedFileIndex);
-                setImage(imageFileManager.getCurrentFileIndex());
-            }
+
         });
     }
 
