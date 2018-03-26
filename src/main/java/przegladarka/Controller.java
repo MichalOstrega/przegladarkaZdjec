@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import przegladarka.files.ImageFile;
 import przegladarka.files.ImageFileManager;
@@ -42,12 +43,18 @@ public class Controller {
 
     private FileChooser fileChooser;
 
+    private DirectoryChooser directoryChooser;
+
     public void initialize() throws InterruptedException {
         //tworzę obiekt klasy FileChooser
         fileChooser = new FileChooser();
+        // tworze obiekt klasy DirectoryChooser
+        directoryChooser = new DirectoryChooser();
+
         imageView();
         imageFileManager = new ImageFileManager();
         openFileMenuItem();
+        openDirectoryMenuItem();
 
         saveFile();
         quitItem();
@@ -58,8 +65,8 @@ public class Controller {
     private void buttonsPrevNext() {
         prevButton.setOnAction(event -> {
             int currentFileIndex = imageFileManager.getCurrentFileIndex();
-            if (currentFileIndex!=-1) {
-                int changedFileIndex = currentFileIndex==0 ? imageFileManager.getImageFiles().size()-1 : currentFileIndex-1;
+            if (currentFileIndex != -1) {
+                int changedFileIndex = currentFileIndex == 0 ? imageFileManager.getImageFiles().size() - 1 : currentFileIndex - 1;
                 imageFileManager.setCurrentFileIndex(changedFileIndex);
                 setImage(imageFileManager.getCurrentFileIndex());
             }
@@ -67,8 +74,8 @@ public class Controller {
         });
         nextButton.setOnAction(event -> {
             int currentFileIndex = imageFileManager.getCurrentFileIndex();
-            if (currentFileIndex!=-1) {
-                int changedFileIndex = currentFileIndex==imageFileManager.getImageFiles().size()-1 ? 0 : currentFileIndex+1;
+            if (currentFileIndex != -1) {
+                int changedFileIndex = currentFileIndex == imageFileManager.getImageFiles().size() - 1 ? 0 : currentFileIndex + 1;
                 imageFileManager.setCurrentFileIndex(changedFileIndex);
                 setImage(imageFileManager.getCurrentFileIndex());
             }
@@ -86,6 +93,25 @@ public class Controller {
                 imageFileManager.getImageFiles().clear();
                 imageFiles.forEach(imageFile -> imageFileManager.openFile(imageFile.toPath()));
                 setImage(0);
+            }
+        });
+    }
+
+    private void openDirectoryMenuItem() {
+        openFolder.setOnAction(event -> {
+            File file = directoryChooser.showDialog(null);
+            if (file.isDirectory()) {
+                File[] files = file.listFiles();
+                for (File file1 : files) {
+                    if (!file1.getName().contains(".jpg")
+                            || !file1.getName().contains(".png")
+                            || !file1.getName().contains(".bmp")
+                            || file1.getName().contains(".gif")) {
+                        imageFileManager.getImageFiles().clear();
+                        imageFileManager.openFile(file1.toPath());
+                        setImage(0);
+                    }
+                }
             }
         });
     }
@@ -125,7 +151,7 @@ public class Controller {
 
     private void quitItem() {
         quitItem.setOnAction(event -> {
-            AlertBox.display("Are you sure?","Czy aby na pewno chcesz opuścić nasz zajebisty program?");
+            AlertBox.display("Are you sure?", "Czy aby na pewno chcesz opuścić nasz zajebisty program?");
         });
     }
 

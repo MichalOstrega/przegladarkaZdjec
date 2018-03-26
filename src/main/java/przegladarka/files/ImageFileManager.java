@@ -19,6 +19,7 @@ public class ImageFileManager {
     }
 
     public void openDirectory() {
+
     }
 
     public List<ImageFile> getImageFiles() {
