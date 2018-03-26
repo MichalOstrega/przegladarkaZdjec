@@ -42,6 +42,8 @@ public class Controller {
     FileChooser fileChooser;
 
     public void initialize() throws InterruptedException {
+        //tworzę obiekt klasy FileChooser
+        fileChooser = new FileChooser();
         imageView();
         imageFileManager = new ImageFileManager();
         openFileMenuItem();
@@ -67,8 +69,6 @@ public class Controller {
 
     private void openFileMenuItem() {
         openItem.setOnAction(event -> {
-            //tworzę obiekt klasy FileChooser
-            fileChooser = new FileChooser();
             //Filtry do ładowania obrazków
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg","*.bmp","*.jpeg"));
             //Pobieram wybrany przez użytkownika plik
