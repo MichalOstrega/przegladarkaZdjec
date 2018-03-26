@@ -13,9 +13,10 @@ public class ImageFileManager {
         currentFileIndex = -1;
     }
 
-    public void openFile(Path image){
+    public void openFile(Path image) {
         imageFiles.add(new ImageFile(image));
         currentFileIndex = 0;
+    }
 
     public void openDirectory() {
     }
