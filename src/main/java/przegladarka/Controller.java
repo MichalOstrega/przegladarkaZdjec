@@ -98,6 +98,6 @@ public class Controller {
 
 
     private void imageView() {
-        image.setImage(new Image("http://woleto.pl/demoty_copy/4181152.jpg"));
+        image.setImage(new Image("http://www.focus.pl/media/cache/default_view/uploads/media/default/0001/13/01c9cda76044ba3835d4564589c6a3d6ecaf91c3.jpeg"));
     }
 }
