@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 
 public class Controller {
@@ -47,16 +48,18 @@ public class Controller {
         imageView();
         imageFileManager = new ImageFileManager();
         openFileMenuItem();
+        saveFile();
+
+
+    }
+
+    private void saveFile() {
         saveItem.setOnAction(event -> {
             File saveFile = fileChooser.showSaveDialog(null);
             if (saveFile != null) {
                 save(saveFile);
             }
-
-
         });
-
-
     }
 
     private void save(File saveFile) {
@@ -72,11 +75,11 @@ public class Controller {
             //Filtry do ładowania obrazków
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg","*.bmp","*.jpeg"));
             //Pobieram wybrany przez użytkownika plik
-            File imageFile = fileChooser.showOpenDialog(null);
+            List<File> imageFiles = fileChooser.showOpenMultipleDialog(null);
             //Uruchamiam metodę openFile i przekazuje sciezke do pliku
-            if (imageFile != null) {
-                imageFileManager.openFile(imageFile.toPath());
-                setImage(imageFileManager.getCurrentFileIndex());
+            if (imageFiles != null) {
+                imageFiles.forEach(imageFile -> imageFileManager.openFile(imageFile.toPath()));
+                setImage(0);
             }
 
         });
