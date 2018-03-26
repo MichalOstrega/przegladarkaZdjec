@@ -47,7 +47,7 @@ public class Controller {
             //tworzę obiekt klasy FileChooser
             FileChooser fileChooser = new FileChooser();
             //Filtry do ładowania obrazków
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg","*.bmp","*.jpeg"));
             //Pobieram wybrany przez użytkownika plik
             File imageFile = fileChooser.showOpenDialog(null);
             //Uruchamiam metodę openFile i przekazuje sciezke do pliku
