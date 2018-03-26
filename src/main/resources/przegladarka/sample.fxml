@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -25,11 +24,13 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-            <children>
-                <ImageView fx:id="image" fitHeight="425.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" />
-            </children>
-        </AnchorPane>
+      <VBox alignment="CENTER">
+         <children>
+      
+                      <ImageView fx:id="image" fitHeight="425.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+            
         <HBox prefHeight="50.0" prefWidth="640.0">
             <children>
                 <Button fx:id="prevButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Prev">
