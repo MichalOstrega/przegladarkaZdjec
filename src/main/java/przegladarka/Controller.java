@@ -75,7 +75,6 @@ public class Controller {
         });
     }
 
-
     private void openFileMenuItem() {
         openItem.setOnAction(event -> {
             //Filtry do ładowania obrazków
@@ -123,11 +122,11 @@ public class Controller {
     private void imageView() {
         image.setImage(new Image("http://www.focus.pl/media/cache/default_view/uploads/media/default/0001/13/01c9cda76044ba3835d4564589c6a3d6ecaf91c3.jpeg"));
     }
-        private void quitItem () {
-            quitItem.setOnAction(event -> {
-                System.exit(0);
-            });
-        }
 
+    private void quitItem() {
+        quitItem.setOnAction(event -> {
+            AlertBox.display("Are you sure?","Czy aby na pewno chcesz opuścić nasz zajebisty program?");
+        });
+    }
 
 }
