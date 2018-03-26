@@ -104,9 +104,9 @@ public class Controller {
                 File[] files = file.listFiles();
                 imageFileManager.getImageFiles().clear();
                 for (File file1 : files) {
-                    if (!file1.getName().contains(".jpg")
-                            || !file1.getName().contains(".png")
-                            || !file1.getName().contains(".bmp")
+                    if (file1.getName().contains(".jpg")
+                            || file1.getName().contains(".png")
+                            || file1.getName().contains(".bmp")
                             || file1.getName().contains(".gif")) {
                         imageFileManager.openFile(file1.toPath());
                         setImage(0);
