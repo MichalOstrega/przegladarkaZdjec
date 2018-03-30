@@ -109,7 +109,7 @@ public class Controller {
     }
 
     private void firstImage() {
-        image.setImage(new Image("http://www.focus.pl/media/cache/default_view/uploads/media/default/0001/13/01c9cda76044ba3835d4564589c6a3d6ecaf91c3.jpeg"));
+        image.setImage(new Image("http://files.tinypic.pl/i/00962/ot6kpgsqxm59.png"));
     }
 
     private void quitItem() {
