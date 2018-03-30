@@ -1,5 +1,9 @@
 package przegladarka.files;
 
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +17,44 @@ public class ImageFileManager {
         currentFileIndex = -1;
     }
 
-    public void openFile(Path image) {
-        imageFiles.add(new ImageFile(image));
+    public void openFile() {
+        FileChooser fileChooser = new FileChooser();
+        //Filtry do ładowania obrazków
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.bmp", "*.jpeg"));
+        //Pobieram wybrany przez użytkownika plik
+        List<File> openFiles = fileChooser.showOpenMultipleDialog(null);
+        //Uruchamiam metodę openFile i przekazuje sciezke do pliku
+        if (openFiles != null) {
+            imageFiles.clear();
+            openFiles.forEach(openFile -> imageFiles.add(new ImageFile(openFile.toPath())));
+        }
         currentFileIndex = 0;
     }
 
     public void openDirectory() {
-
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(null);
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            imageFiles.clear();
+            for (File openFile : files) {
+                if (openFile.getName().contains(".jpg")
+                        || openFile.getName().contains(".png")
+                        || openFile.getName().contains(".bmp")
+                        || openFile.getName().contains(".gif")) {
+                    imageFiles.add(new ImageFile(openFile.toPath()));
+                }
+            }
+        }
+        currentFileIndex=0;
     }
 
     public List<ImageFile> getImageFiles() {
         return imageFiles;
     }
 
-    public void setImageFiles(List<ImageFile> imageFiles) {
-        this.imageFiles = imageFiles;
+    public ImageFile getCurrentImage(){
+        return imageFiles.get(getCurrentFileIndex());
     }
 
     public int getCurrentFileIndex() {
